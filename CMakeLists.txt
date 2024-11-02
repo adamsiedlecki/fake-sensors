@@ -12,6 +12,14 @@ find_package(sensor_msgs REQUIRED)
 find_package(image_transport REQUIRED)
 find_package(std_msgs REQUIRED)
 
+add_executable(fake_lidar src/fake_lidar.cpp)
+ament_target_dependencies(fake_lidar rclcpp sensor_msgs)
+
+install(TARGETS
+  fake_lidar
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights

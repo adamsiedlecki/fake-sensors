@@ -11,12 +11,17 @@ find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(image_transport REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(OpenCV REQUIRED)
 
 add_executable(fake_lidar src/fake_lidar.cpp)
 ament_target_dependencies(fake_lidar rclcpp sensor_msgs)
 
+add_executable(fake_camera src/fake_camera.cpp)
+ament_target_dependencies(fake_camera rclcpp sensor_msgs OpenCV)
+
 install(TARGETS
   fake_lidar
+  fake_camera
   DESTINATION lib/${PROJECT_NAME}
 )
 

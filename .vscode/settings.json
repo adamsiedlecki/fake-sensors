@@ -7,6 +7,13 @@
         "array": "cpp",
         "string": "cpp",
         "string_view": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "memory": "cpp",
+        "format": "cpp",
+        "future": "cpp",
+        "istream": "cpp",
+        "tuple": "cpp",
+        "utility": "cpp",
+        "variant": "cpp"
     }
 }

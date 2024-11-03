@@ -115,6 +115,10 @@ std::vector<unsigned char> FakeCamera::get_next_frame() {
             if (!video_capture.read(frame)) {
                 RCLCPP_INFO(this->get_logger(), "Cannot read any frame from file. Changing to default camera.");
                 video_capture.open(0);
+
+                    int width = static_cast<int>(video_capture.get(cv::CAP_PROP_FRAME_WIDTH));
+                    int height = static_cast<int>(video_capture.get(cv::CAP_PROP_FRAME_HEIGHT));
+                    RCLCPP_INFO(this->get_logger(), "Real camera width: %d height: %d", width, height);
             }
         } else {
             RCLCPP_ERROR(this->get_logger(), "Cannot read frame from real device camera.");
@@ -135,6 +139,10 @@ void FakeCamera::publish_frame()
     msg.step = camera_config.width * 3; // rgb = 3 bytes
 
     msg.data = get_next_frame();
+
+    // nie mam pewności do poniższych
+    msg.encoding = "bgr8";
+    msg.is_bigendian = false;
     
 
     image_publisher->publish(msg);
